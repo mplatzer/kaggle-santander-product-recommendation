@@ -20,8 +20,8 @@ if (file.exists(wide.fn)) {
 } else {
   if (!file.exists("test_ver2.csv"))
     stop("please download `test_ver2.csv.zip` and `test_ver2.csv.zip` from ",
-        "https://www.kaggle.com/c/santander-product-recommendation/data and unzip ",
-        "to your working directory")
+         "https://www.kaggle.com/c/santander-product-recommendation/data and unzip ",
+         "to your working directory")
   # read in train & test data
   train_raw <- fread("train_ver2.csv")
   test_raw <- fread("test_ver2.csv")
@@ -34,9 +34,6 @@ if (file.exists(wide.fn)) {
   wide <- rbind(train_raw, test_raw, fill = TRUE, use.names = TRUE)
   # Note: memory usage peaks here at 5.9 GB
   rm(train_raw, test_raw)
-  # convert fecha_alto to its month; and fill missing with random months
-  wide[, fecha_alta := as.integer(str_sub(fecha_alta, 6, 7))]
-  wide[is.na(fecha_alta), fecha_alta := sample(1:12, sum(is.na(wide$fecha_alta)), replace = TRUE)]
   # convert integers to numerics
   int_cols <- c("age", "renta", "antiguedad", "ind_nuevo", "indrel", "ind_actividad_cliente")
   wide[, (int_cols) := lapply(.SD, as.numeric), .SDcols=int_cols]
@@ -231,6 +228,8 @@ corr <- merge(corr, probes, by="product")
 corr[, ratio := holdout / train]
 sub <- merge(sub, corr, by="product")
 sub[, score := score * ratio]
+# deactivate dela
+sub[product=='ind_dela_fin_ult1', score := 0]
 
 # write out submission format
 setorder(sub, ncodpers, -score)
