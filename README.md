@@ -1,8 +1,8 @@
 # Kaggle Competition: Santander Product Recommendation
 
-This repository reflects the source code of my submission to the `Santander Product Recommendation` Kaggle Competition, for which I ended up on [https://www.kaggle.com/c/santander-product-recommendation/leaderboard](26th place), out of 1809 total participants.
+This repository reflects the source code of my submission to the `Santander Product Recommendation` Kaggle Competition, for which I ended up on [26th place](https://www.kaggle.com/c/santander-product-recommendation/leaderboard), out of 1809 total participants.
 
-I used R (in particular [https://github.com/Rdatatable/data.table](data.table)) for data munging, and [https://github.com/Microsoft/LightGBM](LightGBM) for training a gradient boosting machine model. LightGBM turned out to be very fast and allowed for rapid iterations.
+I used R (in particular [data.table](https://github.com/Rdatatable/data.table)) for data munging, and [LightGBM](https://github.com/Microsoft/LightGBM) for training a gradient boosting machine model. LightGBM turned out to be very fast and allowed for rapid iterations.
 
 key ideas of this approach:
 - use a single GBM model for binary classification (the product becomes yet another variable)
@@ -13,6 +13,6 @@ key ideas of this approach:
 - add count how many times each product was activated in p1 to p5
 - add some customer covariate lags
 - sanitize the customer covariates a bit
-- leverage the information from the [https://www.kaggle.com/c/santander-product-recommendation/forums/t/25727/question-about-map-7?forumMessageId=146330#post146330](leaderboard probes)
+- leverage the information from the [leaderboard probes](https://www.kaggle.com/c/santander-product-recommendation/forums/t/25727/question-about-map-7?forumMessageId=146330#post146330)
 
 many thanks to the Kaggle forum users and the Vienna Kaggle meetup for inspiring ideas!!
